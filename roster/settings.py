@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # 'djangorestframework',
     'api',
     'users',
-    'roster_admin',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'admin:home'
 
 
 # Internationalization
@@ -129,3 +128,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'users:dashboard'

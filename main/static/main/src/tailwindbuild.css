@@ -1,0 +1,5 @@
+/* Install required dependacies before executing */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+

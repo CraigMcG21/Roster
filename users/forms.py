@@ -4,7 +4,7 @@ from django import forms
 
 
 # User form
-class NewUserForm(UserCreationForm):
+class NewEmployeeForm(UserCreationForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'placeholder': 'Username'}), required=True)
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder': 'Password'}), required=True)
