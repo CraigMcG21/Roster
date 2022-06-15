@@ -1,18 +1,9 @@
+from multiprocessing import context
 from telnetlib import LOGOUT
 from django.shortcuts import render
-from .forms import NewUserForm
+from .forms import NewUserForm, EmployeeForm, RosterForm
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
-
-def register(request):
-    if request.method == 'POST':
-        form = NewUserForm(request.POST or None)
-        if form.is_valid():
-            form.save()
-
-    form = NewUserForm()
-    return render(request, 'users/register_user.html', {'form': form})
+from .models import Employee, Roster
 
 
 def login(request):
@@ -29,16 +20,39 @@ def dashboard(request):
 @login_required(login_url='/user/login/')
 def register(request):
     if request.method == 'POST':
-        form = NewUserForm(request.POST or None)
+        form = EmployeeForm(request.POST or None)
         if form.is_valid():
             form.save()
-
-    form = NewUserForm()
-    return render(request, 'users/add_employee.html')
+    form = EmployeeForm()
+    context = {
+        'employees': Employee.objects.all(),
+        'form': form
+    }
+    return render(request, 'users/add_employee.html', context)
 
 
 
 def logout(request):
     return render(request, 'users/logout.html')
+
+def employees(request):
+    context = {
+        'employees': Employee.objects.all()
+    }
+    return render(request, 'users/employee.html', context)
+
+def roster(request):
+    if request.method == 'POST':
+        form = RosterForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+    context = {
+        'form': RosterForm,
+        'rosters': Roster.objects.filter(),
+        
+        
+    }
+    return render(request, 'users/roster.html', context)
 
         
